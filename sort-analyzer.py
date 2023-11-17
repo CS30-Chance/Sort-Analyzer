@@ -70,6 +70,40 @@ def insertionSort(anArray):
     return anArray
 
 
+def checkIfSorted(anArray):
+    for i in range(1, len(anArray)):
+        if anArray[i] < anArray[i-1]:
+            return 'Not Sorted'
+    else:
+        return 'Sorted'
+
+
+def getRunTime(cycle: int):
+    data = [randomData, reversedData, nearlySortedData, fewUniqueData]
+    names = ['randomData', 'reversedData', 'nearlySortedData', 'fewUniqueData']
+    runTime = []
+    for c in range(cycle):
+        currentSet = []
+        for d in range(4):
+            startTime = time.time()
+            insertionSort(data[d])
+            endTime = time.time()
+            print(f"Insertion Sort {names[d]}: {endTime - startTime} seconds")
+            currentSet.append((endTime - startTime))
+        runTime.append(currentSet)
+
+    average = []
+    for i in range(len(runTime[0])):
+        temp = 0
+        for j in runTime:
+            temp += j[i]
+        temp /= len(runTime)
+        # print(temp)
+        average.append(temp)
+    print(average)
+    return runTime
+
+
 data = [randomData, reversedData, nearlySortedData, fewUniqueData]
 names = ['randomData', 'reversedData', 'nearlySortedData', 'fewUniqueData']
 for d in range(4):
@@ -77,18 +111,5 @@ for d in range(4):
     bubbleSort(data[d])
     endTime = time.time()
     print(f"Bubble Sort {names[d]}: {endTime - startTime} seconds")
-
-for d in range(4):
-    startTime = time.time()
-    selectionSort(data[d])
-    endTime = time.time()
-    print(f"Selection Sort {names[d]}: {endTime - startTime} seconds")
-
-for d in range(4):
-    startTime = time.time()
-    insertionSort(data[d])
-    endTime = time.time()
-    print(f"Insertion Sort {names[d]}: {endTime - startTime} seconds")
-
 
 
